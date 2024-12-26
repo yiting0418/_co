@@ -9,5 +9,4 @@
 學校科系 | [金門大學資訊工程系](https://www.nqu.edu.tw/educsie/index.php)
 課程教材 | https://github.com/ccc112a/cpu2os <BR/> https://www.nand2tetris.org/
 
-> 01-04 原創，遇到困難時有參考老師的教材
-> 05 對我而言有些難度，所以直接看老師教材，先理解才複製
+> 01-04 原創，遇到困難時有參考老師的教材，05對我而言有些難度，所以直接看老師教材，先理解才複製
