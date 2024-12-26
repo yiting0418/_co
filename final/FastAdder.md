@@ -24,58 +24,59 @@
 
 以下是快速加法器模組的 Verilog 代碼：
 
-```verilog
-module FastAdder #(parameter WIDTH = 4) (
-    input [WIDTH-1:0] A,
-    input [WIDTH-1:0] B,
-    input Cin,
-    output [WIDTH-1:0] Sum,
-    output Cout
+```FastAdder.v
+module FastAdder (
+    input [3:0] A,  // 4-bit input A
+    input [3:0] B,  // 4-bit input B
+    input Cin,      // Carry input
+    output [3:0] Sum, // 4-bit Sum output
+    output Cout      // Carry output
 );
-    assign {Cout, Sum} = A + B + Cin;
+    wire [3:0] G;   // Generate signals
+    wire [3:0] P;   // Propagate signals
+    wire [3:0] C;   // Carry signals
+
+    // Generate and Propagate
+    assign G = A & B;        // Generate
+    assign P = A ^ B;        // Propagate
+
+    // Carry calculation
+    assign C[0] = Cin;
+    assign C[1] = G[0] | (P[0] & C[0]);
+    assign C[2] = G[1] | (P[1] & C[1]);
+    assign C[3] = G[2] | (P[2] & C[2]);
+
+    // Sum calculation
+    assign Sum = P ^ C[3:0];
+    assign Cout = G[3] | (P[3] & C[3]);
+
 endmodule
+
 ```
 
-### 測試平台
 
-以下是用於驗證快速加法器模組功能的測試平台代碼：
-
-```verilog
-`timescale 1ns / 1ps
-
+```FastAdder_tb.v
 module FastAdder_tb;
-    parameter WIDTH = 4;
-    
-    // 輸入
-    reg [WIDTH-1:0] A;
-    reg [WIDTH-1:0] B;
+    reg [3:0] A, B;
     reg Cin;
-    
-    // 輸出
-    wire [WIDTH-1:0] Sum;
+    wire [3:0] Sum;
     wire Cout;
 
-    // 實例化被測模組 (UUT)
-    FastAdder #(WIDTH) uut (
-        .A(A), 
-        .B(B), 
-        .Cin(Cin), 
-        .Sum(Sum), 
+    // Instantiate the FastAdder
+    FastAdder uut (
+        .A(A),
+        .B(B),
+        .Cin(Cin),
+        .Sum(Sum),
         .Cout(Cout)
     );
 
     initial begin
-        // 初始化輸入
-        A = 4'b0000; B = 4'b0000; Cin = 0;
-
-        // 測試用例
-        #10 A = 4'b0011; B = 4'b0101; Cin = 0;
-        #10 A = 4'b1111; B = 4'b0001; Cin = 1;
-        #10 A = 4'b1010; B = 4'b1010; Cin = 0;
-        #10 A = 4'b0111; B = 4'b0001; Cin = 1;
-
-        // 結束模擬
-        #10 $stop;
+        // Test cases
+        A = 4'b0001; B = 4'b0010; Cin = 0; #10; // 1 + 2
+        A = 4'b0111; B = 4'b0001; Cin = 0; #10; // 7 + 1
+        A = 4'b1111; B = 4'b1111; Cin = 1; #10; // 15 + 15 + 1
+        $stop;
     end
 endmodule
 ```
@@ -96,23 +97,12 @@ endmodule
 
    - 使用ModelSim模擬工具。
    - 運行測試平台（`FastAdder_tb`），並觀察波形結果。
-   - 驗證輸出（`Sum` 和 `Cout`）是否符合預期。
+   - 驗證`Sum` 和 `Cout`是否符合預期。
 
 4. **綜合設計**：
 
    - 指定目標 FPGA 設備並綜合設計。
    - 分析資源利用率和時序報告。
-
-## 驗證
-
-以下測試用例用於驗證快速加法器：
-
-| 輸入 A | 輸入 B | Cin | 預期 Sum | 預期 Cout |
-| ---- | ---- | --- | ------ | ------- |
-| 0011 | 0101 | 0   | 1000   | 0       |
-| 1111 | 0001 | 1   | 0001   | 1       |
-| 1010 | 1010 | 0   | 0100   | 1       |
-| 0111 | 0001 | 1   | 1000   | 0       |
 
 ## 波形模擬圖
 ![alt text](image-5.png)
@@ -129,4 +119,4 @@ endmodule
 ![alt text](image-4.png)
 ## 結論
 
-快速加法器模組是一個簡單但高效的二進制加法實現。其設計和測試為學習 Verilog 和 Quartus 數字電路設計提供了基礎。本文檔可作為進一步優化或集成到更大項目中的參考資料。
+快速加法器模組是一個簡單但高效的二進制加法實現。其設計和測試為學習 Verilog 和 Quartus 數字電路設計提供了基礎。
