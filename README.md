@@ -14,6 +14,9 @@
 ### 05
 對我而言有些難度，所以直接看老師教材，先理解才複製
 ### 課堂筆記
+
 [ALU](https://github.com/yiting0418/_co/blob/master/ALU.jpg)
+
 [證明迪摩根定律第二式](https://github.com/yiting0418/_co/blob/master/IMG_0327.jpeg)
+
 [FA](https://github.com/yiting0418/_co/blob/master/week3.pdf)
