@@ -10,3 +10,4 @@
 課程教材 | https://github.com/ccc112a/cpu2os <BR/> https://www.nand2tetris.org/
 
 全部原創，遇到困難時有參考老師的教材
+05完全看老師教材理解
