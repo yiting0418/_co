@@ -7,3 +7,32 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 // Put your code here.
+@2
+M=0
+
+//(LOOP)
+(loop)
+
+//if (R0<=0) goto exit1;
+@0
+D=M
+@exit1
+D; JLE
+
+//R2 += R1;
+@1
+D=M
+@2
+M=D+M
+
+//R0--
+@0
+M=M-1
+
+//goto LOOP; 
+@loop
+0;JMP
+
+(exit1)
+@exit1
+0;JMP
