@@ -20,3 +20,6 @@
 [證明迪摩根定律第二式](https://github.com/yiting0418/_co/blob/master/IMG_0327.jpeg)
 
 [FA](https://github.com/yiting0418/_co/blob/master/week3.pdf)
+
+### 其他
+[加分](https://github.com/yiting0418/_co/tree/master/%E5%8A%A0%E5%88%86)
