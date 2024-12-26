@@ -9,6 +9,7 @@
 2. 學習使用Quartus進行波形模擬。
 
 ## 設計說明
+![image](https://github.com/user-attachments/assets/94efc12f-214d-41e7-8dbc-d69c66918b9c)
 
 - **輸入**：
   - `A`：n 位二進制輸入。
